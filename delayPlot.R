@@ -7,7 +7,7 @@ delay_flight_num <- filter(flights_airports, DEPARTURE_DELAY > 0) %>% group_by(O
 flight_info <- left_join(total_flights_num, delay_flight_num, by = "ORIGIN_AIRPORT")
 flight_info <- mutate(flight_info, delay_rate = percent(delay_num / total_num))
 
-flight_airports_info <<- left_join(airports, flight_info, by = "ORIGIN_AIRPORT")
+flight_airports_info <- left_join(airports, flight_info, by = "ORIGIN_AIRPORT")
 mapplot <- function(state){
   data_select <- filter(flight_airports_info, STATE == state)
   g <- list(
@@ -21,10 +21,13 @@ mapplot <- function(state){
     subunitwidth = 0.5
   )
   
-  x <- plot_geo(data_select, lat = ~LATITUDE, lon = ~LONGITUDE,colors = c("green","red"), hoverinfo = "skip") %>% 
+  x <- plot_geo(data_select, lat = ~LATITUDE, lon = ~LONGITUDE,colors = c("green","red")) %>% 
     add_markers(
-      text = ~paste(AIRPORT, CITY, STATE, paste("DELAY_RATE", delay_rate), sep = "<br />"),
-      color = ~delay_rate, symbol = I("circle"), size = I(10), hoverinfo = "text"
+      color = ~delay_rate, 
+      symbol = I("circle"), 
+      size = I(10), 
+      hoverinfo = "text",
+      text = paste(data_select$AIRPORT, data_select$CITY, data_select$STATE, sep = "<br />")
     ) %>%
     colorbar(title = "Delay Rate") %>%
     layout(
@@ -42,8 +45,3 @@ airport_code <- function(airport_name_origin,airport_name_destination){
   return(results)
 }
 
-#no_delay <- function(origin,destination){
-#  table_data <- flights[which((flights$DEPARTURE_DELAY<=0) & (flights$ARRIVAL_DELAY<=0) &(flights$ORIGIN_AIRPORT==origin) & (flights$DESTINATION_AIRPORT==destination)),]
-#  results <- sort(table(unlist(xyz_data$AIRLINE_NAME)),decreasing = TRUE)
-#  return(results)
-#}

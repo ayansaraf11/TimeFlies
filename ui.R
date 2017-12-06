@@ -2,7 +2,7 @@
 library(shiny)
 library(shinythemes)
 shinyUI(fluidPage(
-#  theme = shinytheme("flatly"),
+theme = shinytheme("flatly"),
   navbarPage("TimeFlies",
              tabPanel("Home",
                       titlePanel(h3("What is TimeFlies?")),
@@ -23,7 +23,6 @@ shinyUI(fluidPage(
                       br(),
                       titlePanel(h3("What packages were used in making this app?")),
                       includeText("packages.txt")),
-             #tabPanel("The Team"),
   tabPanel("Airports and Delays",
     sidebarLayout(
       sidebarPanel(

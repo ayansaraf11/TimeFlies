@@ -15,3 +15,12 @@ The major challenges which came up in this assignment were developing an appropr
 The expansion of this project can be creating a light simulation and understandings which flight would be delayed using the machine learning protocol. This can create a prediction chart and would help travel portals decide the ticket prices along with airlines controlling their flight traffic in order to reduce flight delay and cancellations. 
 
 Link to app: https://ayansaraf.shinyapps.io/TimeFlies/
+
+#### Team Members
+Ayan Saraf 
+
+Zhining Wang
+
+Wanxiang Cai
+
+Vibhu Iyer
